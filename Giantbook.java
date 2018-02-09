@@ -22,22 +22,28 @@ public class Giantbook
       {
         int p = StdIn.readInt();
         int q = StdIn.readInt();
+
         i++; // Increment number of edges
         if (uf.connected(p, q)) continue;
         uf.union(p, q);
 
         // Giant component emerges
-        if (uf.maxComponentSize() > (n/2) && i_giant == -1) {
+        if (i_giant == -1 && uf.maxComponentSize() > (n/2)) {
           i_giant = i;
         }
 
         // Isolated
+        if (i_isolated == -1 && uf.isolated() == 0) {
+          i_isolated = i;
+        }
 
         // Connected
-        if (uf.count() == 1 && i_connected == -1) {
+        if (i_connected == -1 && uf.count() == 1) {
           i_connected = i;
           break;  // Check if the graph is connected
+
         }
+
 
       }
 
@@ -49,6 +55,8 @@ public class Giantbook
       StdOut.println("Number of components: "+ n + " \nNumber of random connections before connected: " + i_connected + " \nNumber of components: " + uf.count());
       StdOut.println("Max component size: " + uf.maxComponentSize());
       StdOut.println("Number of rand connections before giant component: " + i_giant);
+      StdOut.println("Number of rand connections before non-isolated: " + i_isolated);
+
     }
 
 

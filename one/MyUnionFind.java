@@ -85,6 +85,7 @@ public class MyUnionFind {
     private int[] size;     // size[i] = number of sites in subtree rooted at i
     private int count;      // number of components
     private int max;        // Size of the biggest component
+    private int isolated;
 
     /**
      * Initializes an empty union–find data structure with {@code n} sites
@@ -96,6 +97,7 @@ public class MyUnionFind {
      */
     public MyUnionFind(int n) {
         count = n;
+        isolated = n;
         parent = new int[n];
         size = new int[n];
         max = 1;
@@ -164,6 +166,14 @@ public class MyUnionFind {
         int rootQ = find(q);
         if (rootP == rootQ) return;
 
+        if(size[rootP] == 1) {
+          isolated--;
+        }
+
+        if(size[rootQ] == 1) {
+          isolated--;
+        }
+
         // make smaller root point to larger one
         if (size[rootP] < size[rootQ]) {
             parent[rootP] = rootQ;
@@ -176,7 +186,7 @@ public class MyUnionFind {
             parent[rootQ] = rootP;
             size[rootP] += size[rootQ];
             if (size[rootP] > max) {
-              max = size[rootQ];
+              max = size[rootP];
             }
         }
         count--;
@@ -184,6 +194,10 @@ public class MyUnionFind {
 
     public int maxComponentSize() {
       return max;
+    }
+
+    public int isolated() {
+      return isolated;
     }
 
 
