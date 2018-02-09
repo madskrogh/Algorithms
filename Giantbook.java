@@ -22,13 +22,12 @@ public class Giantbook
       {
         int p = StdIn.readInt();
         int q = StdIn.readInt();
-
         i++; // Increment number of edges
         if (uf.connected(p, q)) continue;
         uf.union(p, q);
 
         // Giant component emerges
-        if (i_giant == -1 && uf.maxComponentSize() > (n/2)) {
+        if (i_giant == -1 && uf.maxComponentSize() >= (n/2)) {
           i_giant = i;
         }
 
@@ -40,11 +39,9 @@ public class Giantbook
         // Connected
         if (i_connected == -1 && uf.count() == 1) {
           i_connected = i;
-          break;  // Check if the graph is connected
+          break;
 
         }
-
-
       }
 
       /* The output of your program is a single line with four numbers:
