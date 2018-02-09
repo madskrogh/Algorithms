@@ -167,12 +167,12 @@ public class MyUnionFind {
         if (size[rootP] < size[rootQ]) {
             parent[rootP] = rootQ;
             size[rootQ] += size[rootP];
-            if (size[rootQ] > max) max = size(rootQ);
+            if (size[rootQ] > max) {max = size[rootQ];}
         }
         else {
             parent[rootQ] = rootP;
             size[rootP] += size[rootQ];
-            if (size[rootP] > max) max = size(rootQ);
+            if (size[rootP] > max) {max = size[rootQ];}
         }
         count--;
     }
