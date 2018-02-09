@@ -5,19 +5,16 @@ public class RandomClient {
   public static void main(String[] args) {
     int n = StdIn.readInt(); // Pick from a uniform(0,n) distribution
     //int t = StdIn.readInt(); // Number of times to repeat the experiment
-    int[] a = new int[6*n]; // Array for holding u and v, twice
+    int[] a = new int[10*n]; // Array for holding u and v, twice
 
-
-    for (int i=0; i<(6*n); i++) {
+    // Initialize array
+    for (int i=0; i<(10*n); i++) {
       a[i] = StdRandom.uniform(n);
     }
 
-
+    // Print to StdOut
     StdOut.println(n);
-    /*while (true) StdOut.println(StdRandom.uniform(n));
-    */
-
-    for (int i=0; i<(6*n); i++) {
+    for (int i=0; i<(10*n); i++) {
       StdOut.println(a[i]);
     }
   }

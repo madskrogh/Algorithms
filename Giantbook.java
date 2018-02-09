@@ -1,6 +1,7 @@
 // Import MyUnionFind.java
 import edu.princeton.cs.algs4.*;
-import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+import one.MyUnionFind;
+
 
 public class Giantbook
 {
@@ -10,15 +11,13 @@ public class Giantbook
       /*Read from StdIn a number n, then n pairs of numbers u and v. An event happens
       at time i if it happens after i edges have been read*/
       int n = StdIn.readInt(); //Size of data structure
-      //int t = StdIn.readInt(); // Number of times to repeat experiment
-      //int[] a; // u and v array
       int i = 0; //Number of edges that have been read
       int i_isolated = -1; // Number of edges read when no more isolated nodes
       int i_giant = -1; // Number of edges read when graph has a giant component
       int i_connected = -1; // Number of edges read when the graph is connected
 
-      WeightedQuickUnionUF uf = new WeightedQuickUnionUF(n);
-      //Commejgkls
+      MyUnionFind uf = new MyUnionFind(n);
+
       while (!StdIn.isEmpty())
       {
         int p = StdIn.readInt();
@@ -26,7 +25,20 @@ public class Giantbook
         i++; // Increment number of edges
         if (uf.connected(p, q)) continue;
         uf.union(p, q);
-        if (uf.count() == 1) i_connected = i; // Check if the graph is connected
+
+        // Giant component emerges
+        if (uf.maxComponentSize() > (n/2) && i_giant == -1) {
+          i_giant = i;
+        }
+
+        // Isolated
+
+        // Connected
+        if (uf.count() == 1 && i_connected == -1) {
+          i_connected = i;
+          break;  // Check if the graph is connected
+        }
+
       }
 
       /* The output of your program is a single line with four numbers:
@@ -35,6 +47,8 @@ public class Giantbook
       the first time that the graph has a giant component
       the first time that the graph is connected. */
       StdOut.println("Number of components: "+ n + " \nNumber of random connections before connected: " + i_connected + " \nNumber of components: " + uf.count());
+      StdOut.println("Max component size: " + uf.maxComponentSize());
+      StdOut.println("Number of rand connections before giant component: " + i_giant);
     }
 
 
