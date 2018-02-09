@@ -79,7 +79,7 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class WeightedQuickUnionUF {
+public class MyUnionFind {
     private int[] parent;   // parent[i] = parent of i
     private int[] size;     // size[i] = number of sites in subtree rooted at i
     private int count;      // number of components
@@ -93,7 +93,7 @@ public class WeightedQuickUnionUF {
      * @param  n the number of sites
      * @throws IllegalArgumentException if {@code n < 0}
      */
-    public WeightedQuickUnionUF(int n) {
+    public MyUnionFind(int n) {
         count = n;
         parent = new int[n];
         size = new int[n];
